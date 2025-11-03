@@ -1,0 +1,24 @@
+CREATE TABLE members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    joined_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    published_date DATE,
+    available INTEGER DEFAULT 1
+);
+
+CREATE TABLE loans (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    member_id INTEGER NOT NULL,
+    book_id INTEGER NOT NULL,
+    loan_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    return_date TIMESTAMP,
+    FOREIGN KEY (member_id) REFERENCES members (id),
+    FOREIGN KEY (book_id) REFERENCES books (id)
+);
